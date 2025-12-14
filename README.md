@@ -97,6 +97,26 @@
 
 ---
 
+## 📐 Architecture Decision Records (ADR)
+
+이 프로젝트는 주요 아키텍처 및 UX 설계 결정을  
+**ADR(Architecture Decision Record)** 문서로 기록하고 있습니다.
+
+각 ADR은 “왜 이런 설계를 선택했는지”에 대한 맥락과 판단을 담고 있습니다.
+
+### 🇰🇷 설계 결정 목록
+
+- **ADR 001** — 그리드 기반 타임라인 UI 설계  
+  `docs/adr/001-grid-based-timeline-ui.md`
+
+- **ADR 002** — 게스트 모드 및 로그인 데이터 동기화 전략  
+  `docs/adr/002-guest-login-sync-strategy.md`
+
+- **ADR 003** — 타임라인 제스처 인터랙션 모델  
+  `docs/adr/003-timeline-gesture-model.md`
+
+---
+
 ## 🧩 설계 및 리팩토링
 
 - Home 기능을 역할 단위로 분리하여 책임 명확화
@@ -222,6 +242,21 @@ Brain dump Todos → Select category → Choose Big3 → Place on timeline
 ---
 
 ## 🧩 Architecture & Refactoring
+
+### 🇺🇸 Architecture Decisions
+
+This project documents key architectural and UX decisions using ADRs.
+
+Each record explains **why** a particular decision was made, rather than how it was implemented.
+
+- **ADR 001** — Grid-based timeline UI  
+  `docs/adr/001-grid-based-timeline-ui.md`
+
+- **ADR 002** — Guest mode & login data sync strategy  
+  `docs/adr/002-guest-login-sync-strategy.md`
+
+- **ADR 003** — Timeline gesture interaction model  
+  `docs/adr/003-timeline-gesture-model.md`
 
 ### Home Feature Refactor (2025-12)
 
