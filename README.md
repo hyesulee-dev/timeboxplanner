@@ -119,17 +119,53 @@
 
 ## 🧩 설계 및 리팩토링
 
-- Home 기능을 역할 단위로 분리하여 책임 명확화
-- 타임라인 UI를 **그리드 기반 구조**로 통합
-- 블록 높이 = 시간 길이로 직관성 강화
-- 제스처 충돌을 유발하던 기존 리스트/스와이프 UI 제거
+### 🏗 Architecture Overview
 
----
+TimeBoxPlanner는 **MVVM + Offline-first** 구조를 기반으로 설계되었습니다.  
+사용자는 로그인 여부와 관계없이 앱을 사용할 수 있으며,  
+로그인 이후에도 로컬과 서버 데이터가 안정적으로 동기화되도록 구성되어 있습니다.
 
-## 🚧 현재 상태
+```text
+UI (Jetpack Compose)
+ ├─ HomeScreen / HomeStep1~3 / HomeTimeline
+ │    └─ UI State & Events
+ │
+ ▼
+ViewModel (HomeViewModel)
+ ├─ UI State 관리
+ ├─ 사용자 이벤트 처리
+ └─ 비즈니스 로직 조합
+ │
+ ▼
+Repository Layer
+ ├─ LocalRepository (Room)
+ ├─ RemoteRepository (Firestore)
+ └─ Sync Orchestration
+ │
+ ▼
+Data Layer
+ ├─ Room Database (Offline-first)
+ ├─ Firestore (Cloud Sync)
+ └─ WorkManager (Background Sync)
 
-- 개인 프로젝트로 **활발히 개발 중**
-- UX 완성도 및 퍼포먼스 지속 개선 중
+```
+### 설계 포인트 요약
+
+- **Offline-first**
+  - 로그인 전에도 모든 기능 사용 가능
+  - 네트워크 상태와 무관한 UX 보장
+
+- **Single Source of Truth**
+  - ViewModel을 통해 UI 상태를 단일 흐름으로 관리
+
+- **명확한 책임 분리**
+  - UI / State / Data Layer 분리
+  - Home 기능을 Step 단위 파일로 분리하여 유지보수성 강화
+
+- **확장 가능성**
+  - ADR 기반 설계로 주요 결정 기록
+  - 기능 확장 시 구조 변경 최소화
+
 
 ---
 
@@ -257,6 +293,53 @@ Each record explains **why** a particular decision was made, rather than how it 
 
 - **ADR 003** — Timeline gesture interaction model  
   `docs/adr/003-timeline-gesture-model.md`
+
+
+### 🏗 Architecture Overview
+
+TimeBoxPlanner is built on an **MVVM + offline-first** architecture.
+
+The app allows users to start immediately without login, while ensuring  
+safe and predictable data synchronization after authentication.
+
+```text
+UI (Jetpack Compose)
+ ├─ HomeScreen / HomeStep1~3 / HomeTimeline
+ │    └─ UI State & Events
+ │
+ ▼
+ViewModel (HomeViewModel)
+ ├─ UI state management
+ ├─ User intent handling
+ └─ Business logic composition
+ │
+ ▼
+Repository Layer
+ ├─ LocalRepository (Room)
+ ├─ RemoteRepository (Firestore)
+ └─ Sync orchestration
+ │
+ ▼
+Data Layer
+ ├─ Room Database (Offline-first)
+ ├─ Firestore (Cloud sync)
+ └─ WorkManager (Background jobs)
+```
+#### Design Highlights
+
+- **Offline-first UX**
+  - Full functionality available before login
+  - Stable experience regardless of network state
+
+- **Clear separation of concerns**
+  - UI, state, and data layers are strictly separated
+  - Home feature split into step-based components
+
+- **Scalable by design**
+  - Key decisions documented via ADRs
+  - Architecture supports future feature expansion
+
+
 
 ### Home Feature Refactor (2025-12)
 
