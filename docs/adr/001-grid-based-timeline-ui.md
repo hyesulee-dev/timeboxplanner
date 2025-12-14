@@ -1,7 +1,7 @@
 # ADR 001: Grid-based Timeline UI
 
 ## Status
-Accepted
+Accepted 
 
 ## Context
 
