@@ -102,3 +102,12 @@ and intentionally mirrors the interaction rules enforced in code.
 
 Any future changes to timeline gestures should be recorded as a new ADR
 rather than modifying this decision retroactively.
+
+
+---
+
+### Implementation Update
+
+- Timeline blocks now support long-press drag to move the entire time range vertically.
+- All time changes are validated at commit time, and overlapping schedules are rejected with a snackbar warning.
+- This preserves the original gesture model while allowing direct manipulation of start times under strict validation rules.
